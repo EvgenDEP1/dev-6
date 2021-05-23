@@ -2,28 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ page_title|default:"аутентификация"|capfirst }}</title>
+    <style>
+        body {
+            background-color: #333333;
+            color: #fff;
+        }
+        li {
+
+            list-style-type: none;
+            display: inline;
+            margin-right: 5px;
+            padding: 3px;
+        }
+        li a {
+            text-decoration: none;
+            text-transform:uppercase;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        li a:hover {
+            color: #03ff00;
+            transition: .4s ease-out;
+        }
+        a.user {
+            color: #fff;
+            text-decoration: none;
+        }
+        a.user:hover {
+            color: red;
+            transition: .4s ease-out;
+        }
+    </style>
 </head>
 <body>
-<!--<a href="{% url 'authapp:register' %}">Регистрация</a>-->
-<!--<a href="{% url 'auth:login' %}">Вход в систему</a>-->
+<nav class="menu">
+    <div class="container">
+            <ul class="">
+                <li><a href="{% url 'mainapp:index' %}" class="nav-link px-2 text-secondary">Главная</a></li>
+            </ul>
+            <div class="text-end">
+                {% if user.is_authenticated %}
+                    <span class="user">{{ user.username }}</span>
+                    <a href="{% url 'authapp:logout' %}" class="user">Выйти</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
 
-
-<!--{% if user.is_authenticated %}-->
-<!--        <div>-->
-<!--            <span>{{ user.username }}</span>-->
-<!--            <a href="{% url 'auth:logout' %}">logout</a>-->
-<!--        </div>-->
-<!--{% endif %}-->
-
-{% if user.is_authenticated %}
-<span>{{ user.username }}</span>
-    <a href="{% url 'auth:logout' %}">Выйти</a>
-
-{% else %}
-    <a href="{% url 'authapp:register' %}">Регистрация</a>
-    <a href="{% url 'mainapp:login' %}">Вход в систему</a>
-{% endif %}
+<main class="container mt-3">
+    {% for item in num_img %}
+        <img style="width: 50%;" src="{{ item.image.url }}">
+    {% endfor %}
+</main>
 
 </body>
 </html>
