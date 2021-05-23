@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<a href="{% url 'authapp:register' %}">Регистрация</a>-->
+<!--<a href="{% url 'auth:login' %}">Вход в систему</a>-->
+
+
+<!--{% if user.is_authenticated %}-->
+<!--        <div>-->
+<!--            <span>{{ user.username }}</span>-->
+<!--            <a href="{% url 'auth:logout' %}">logout</a>-->
+<!--        </div>-->
+<!--{% endif %}-->
+
+{% if user.is_authenticated %}
+<span>{{ user.username }}</span>
+    <a href="{% url 'auth:logout' %}">Выйти</a>
+
+{% else %}
+    <a href="{% url 'authapp:register' %}">Регистрация</a>
+    <a href="{% url 'mainapp:login' %}">Вход в систему</a>
+{% endif %}
+
+</body>
+</html>
